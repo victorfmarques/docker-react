@@ -1,0 +1,15 @@
+# Permissao sudo importante para Docker CLI
+sudo: required
+
+# Indicando o servico a ser utilizado
+services:
+  - docker
+
+# Indicando o que precisa ser executado antes de executar a atividade core
+before_install:
+  # Buildando a imagem do projeto
+  - docker build -t docker-react -f Dockerfile.dev .
+
+# Executando o comando de execucao de testes dentro do container buildado
+script:
+  - docker run -e CI=true docker-react npm run test
