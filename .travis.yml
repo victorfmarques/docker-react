@@ -13,3 +13,15 @@ before_install:
 # Executando o comando de execucao de testes dentro do container buildado
 script:
   - docker run -e CI=true docker-react npm run test
+
+# Configuracao de deploy
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "frontend"
+  env: "Frontend-env"
+  bucket_name: "elasticbeanstalk-us-east-2-654654179241"
+  bucket_path: "frontend"
+
+  on:
+    branch: master
